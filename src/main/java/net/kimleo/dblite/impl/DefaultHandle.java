@@ -82,8 +82,8 @@ public class DefaultHandle implements Handle, AutoCloseable {
 
     @Override
     public ResultSet query(String query) {
-        try (Statement statement = connection.createStatement()){
-            return statement.executeQuery(query);
+        try {
+            return connection.createStatement().executeQuery(query);
         } catch (SQLException e) {
             throw new DBLiteException(e);
         }
