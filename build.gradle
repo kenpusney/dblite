@@ -8,6 +8,9 @@ repositories {
     jcenter()
 }
 
+allprojects {
+    version = "0.0.1"
+}
 // In this section you declare the dependencies for your production and test code
 dependencies {
     compile group: 'org.postgresql', name: 'postgresql', version: '42.0.0'

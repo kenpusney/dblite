@@ -4,6 +4,7 @@ import net.kimleo.dblite.functional.Extractor;
 import net.kimleo.dblite.functional.Injector;
 
 import java.io.Closeable;
+import java.sql.ResultSet;
 import java.util.List;
 
 public interface Handle extends Closeable {
@@ -13,4 +14,5 @@ public interface Handle extends Closeable {
     <T> void update(Iterable<T> ts, Injector<T> translator);
 
     void execute(String statement);
+    ResultSet query(String query);
 }
