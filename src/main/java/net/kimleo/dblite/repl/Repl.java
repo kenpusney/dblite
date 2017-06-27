@@ -17,10 +17,12 @@ public class Repl {
 
     private final DB db;
     private final PrintStream out;
+    private final boolean redirected;
 
     public Repl(DB db) {
         this.db = db;
         out = System.out;
+        redirected = (System.console() == null);
     }
 
     public void run(BufferedReader reader) {
@@ -35,7 +37,8 @@ public class Repl {
             } catch (DBLiteException e) {
                 out.printf("Error found when execute: %s%n", e.getCause().toString());
             } catch (EOFException e) {
-                out.printf("%nBye bye%n");
+                if (!redirected)
+                    out.printf("%nBye bye%n");
                 break;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -44,11 +47,15 @@ public class Repl {
     }
 
     private void prompt() {
-        out.print("db>> ");
+        if (!redirected) {
+            out.print("db>> ");
+        }
     }
 
     private void subPrompt() {
-        out.print("  => ");
+        if (!redirected) {
+            out.print("  => ");
+        }
     }
 
     private void eval(String expr) {
@@ -107,7 +114,7 @@ public class Repl {
             subPrompt();
             segment = br.readLine();
             if (segment == null) {
-                out.println();
+                if (!redirected) out.println();
                 break;
             }
         }
