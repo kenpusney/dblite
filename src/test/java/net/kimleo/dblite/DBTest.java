@@ -1,5 +1,6 @@
 package net.kimleo.dblite;
 
+import net.kimleo.dblite.repl.Repl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
