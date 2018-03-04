@@ -1,6 +1,7 @@
 package net.kimleo.dblite;
 
 import net.kimleo.dblite.exception.DBLiteException;
+import net.kimleo.dblite.functional.Connector;
 import net.kimleo.dblite.impl.ConnectionSupplierDB;
 import net.kimleo.dblite.impl.DataSourceDB;
 
@@ -27,8 +28,8 @@ public interface DB {
         return new DataSourceDB(ds);
     }
 
-    static DB connect(Supplier<Connection> supplier) {
-        return new ConnectionSupplierDB(supplier);
+    static DB connect(Connector connector) {
+        return new ConnectionSupplierDB(connector);
     }
 
     static DB connect(String url, String username, String password) {

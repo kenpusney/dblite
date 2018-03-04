@@ -1,6 +1,5 @@
 package net.kimleo.dblite;
 
-import net.kimleo.dblite.repl.Repl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,10 +22,10 @@ public class DBTest {
     }
 
     private void setUpTestData(Handle handle) {
-        handle.execute("create table if not exists hello (world int)");
+        handle.execute("create table if not exists hello (id int)");
         handle.execute("delete from hello");
         for (int i = 0; i < 3; i++) {
-            handle.execute(String.format("insert into hello (world) values (%d)", i + 1));
+            handle.execute(String.format("insert into hello (id) values (%d)", i + 1));
         }
     }
 
@@ -42,7 +41,7 @@ public class DBTest {
     @Test
     public void shouldSuccessfullyRetrieveAllData() throws Exception {
         postgres.withHandle(handle -> {
-            List<Integer> ints = handle.more("select * from hello", rs -> rs.getInt("world"));
+            List<Integer> ints = handle.more("select * from hello", rs -> rs.getInt("id"));
 
             assertThat(ints, equalTo(Arrays.asList(1, 2, 3)));
         });
