@@ -90,7 +90,7 @@ public class DefaultHandle implements Handle, AutoCloseable {
     }
 
     @Override
-    public void close() throws IOException {
+    public void close() {
         try {
             connection.close();
         } catch (SQLException ignored) {

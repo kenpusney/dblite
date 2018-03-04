@@ -13,6 +13,6 @@ allprojects {
 }
 // In this section you declare the dependencies for your production and test code
 dependencies {
-    compile group: 'org.postgresql', name: 'postgresql', version: '42.0.0'
+    testCompile group: 'org.postgresql', name: 'postgresql', version: '42.0.0'
     testCompile 'junit:junit:4.12'
 }
